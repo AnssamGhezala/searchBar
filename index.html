@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Search Bar </title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+</head>
+
+<!-- <body>
+    <center>
+        <input id="file-input" type="file"/>
+    </center>
+
+</body> -->
+
+<body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+        class Element extends React.Component{
+         
+         handleFile = (event) => {
+             console.log("FILE ");
+             console.log(event.target.files);
+         }
+            render(){    
+            return (
+                <center>
+                   <input id="file-input" type="file" onChange={this.handleFile}/>
+                 </center>
+            )
+    
+            }
+        }
+         const element = <Element />
+         ReactDOM.render(
+            element,
+            document.getElementById('root')
+        );
+        </script>
+</body>
+
+</html>
