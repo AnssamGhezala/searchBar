@@ -25,7 +25,7 @@
     <script type="text/babel">
         class Element extends React.Component{
          
-            state = {file: ""};
+            state = {file: "", input:"", words:"", suggestions:[]};
             
             changeState = (object) => {
                 console.log(this);
@@ -37,18 +37,17 @@
     
                 var fileInput = event.target;
 
-              //  console.log(fileInput.files);
                 
                 var reader = new FileReader();
 
                 reader.readAsText(fileInput.files[0]);
                 
                 reader.onload = (event) => {
-            //   console.log(event.target);
-            //   console.log(reader.readyState);
-            //   return changeState(object);
+               
                 this.setState({file:reader});
-                 };  
+                this.state.words = this.state.file.result.split(" ");
+                this.setState({suggestions:this.state.words});
+                };  
 
             }
 
@@ -72,15 +71,84 @@
                 }
             }
 
+            handleChange = (event) => {
+                var text = event.target.value;
+              
+                this.setState({input:text}, () => {
+                
+                    var sugg = this.state.words.filter(word => {
+                        return word.indexOf(this.state.input) === 0;
+                    });
 
-            render(){   
-                 
+                  this.setState({suggestions:sugg});
+
+                });
+                
+                
+
+            }
+
+            handleClick = () => {
+                document.getElementById("fileInput").click();
+            }
+            
+            
+      
+        render(){  
+            const labelStyle = {
+                color: 'blue'
+            };
+
+            const titleStyle = {
+                marginTop: '30px',
+                color: '#555',
+                fontSize: '60px'
+               
+            }
+
+            const fileBtnStyle = {
+                marginTop: '20px',
+                width: '200px',
+                fontSize: '30px'
+            };
+
+            const searchBarStyle = {
+                marginTop: '30px',
+                width: '400px',
+                fontSize: '30px'
+            };
+            
+            const divStyle = {
+              fontFamily:'Helvetica-Light'
+            };
+
+            const invisible = {
+                display: 'none'
+            };
+            
+
+            
+            var suggestions = this.state.suggestions.map(function(suggestion) {
+                    return  <p> {suggestion} </p>;
+                });
+             
             return (
+                <div style={divStyle}>
                 <center>
-                   <input id="file-input" type="file" onChange={this.handleFile}/>
-                   <input id="searchBar" type="input" onKeyPress={this.handleKeyPress} />
-                 </center>
-            )
+                    <h1 style={titleStyle}> Welcome to Search Bar ! :) </h1>
+                </center>
+               <center>
+                 <input id="fileInput" type="file" style={invisible} onChange={this.handleFile}/>
+                 <button id="fileBtn" className="btn btn-dark" onClick={this.handleClick} style={fileBtnStyle}> Choose File </button>
+               </center>
+               <center>
+                <input id="searchBar" type="input" style={searchBarStyle} onKeyPress={this.handleKeyPress} onChange={this.handleChange}/>
+                {suggestions}
+                </center>
+                
+                </div>
+                
+            );
     
             }
         }
