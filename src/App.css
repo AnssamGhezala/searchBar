@@ -1,0 +1,30 @@
+.labelStyle {
+  color: blue
+}
+
+.titleStyle {
+  margin-top: 30px;
+  color: #555;
+  font-size: 60px
+ 
+}
+
+.fileBtnStyle {
+  margin-top: 20px;
+  width: 200px;
+  font-size: 30px
+}
+
+.searchBarStyle {
+  margin-top: 30px;
+  width: 400px;
+  font-size: 30px
+}
+
+.divStyle {
+font-family:Helvetica-Light
+}
+
+.invisible {
+  display: none
+}
